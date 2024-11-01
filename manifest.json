@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "BrowserPop",
+    "description": "Keep a check on your browser/website activity with BrowserPop.",
+    "version": "0.0",
+    "permissions": [
+        "storage",
+        "webRequest",
+        "webNavigation",
+        "tabs",
+        "activeTab",
+        "scripting"
+    ],
+    "background": {
+        "service_worker": "index.js"
+    },
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "host_permissions": [
+        "https://*/*"
+    ]
+}
