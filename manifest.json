@@ -21,6 +21,16 @@
             ]
         }
     ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "blocked.html"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
     "host_permissions": [
         "<all_urls>"
     ]
