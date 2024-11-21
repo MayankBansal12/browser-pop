@@ -6,18 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>
-        BrowserPop - keep a check on your browser
+        browserpop - keep a check on your browser
     </title>
 </head>
 
 <body>
-    <h2>BrowserPop</h2>
+    <h2 class="main-heading">BrowserPop</h2>
+    <div class="current-status active">
+        <div class="outer-circle dot">
+            <div class="inner-circle dot"></div>
+        </div>
+        <p id="current-status">currently active</p>
+    </div>
 
-    <div id="blocked-urls"></div>
-    <div id="message"></div>
-    <input type="text" id="urlInput" placeholder="enter URL to block, eg:- google.com">
-    <button id="addButton">Add</button>
-    <div id="blockedSitesList"></div>
+    <div class="main-container">
+        <h2 class="secondary-heading">manage your browser activity with ease<br />start by adding a site to block list</h2>
+        <div id="blocked-urls" class="blocked-urls-container"></div>
+        <div id="message"></div>
+        <input type="text" id="urlInput" class="url-input" placeholder="enter URL to block, eg:- google.com">
+        <button id="addButton" class="add-button">Add</button>
+        <div id="blockedSitesList"></div>
+    </div>
     <script src="popup.js"></script>
 </body>
 
