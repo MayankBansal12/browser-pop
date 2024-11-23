@@ -20,12 +20,24 @@
     </div>
 
     <div class="main-container">
-        <h2 class="secondary-heading">manage your browser activity with ease<br />start by adding a site to block list</h2>
+        <h2 class="secondary-heading">manage your browser activity with ease<br />start by adding a site to block list
+        </h2>
         <div id="blocked-urls" class="blocked-urls-container"></div>
         <div id="message"></div>
         <input type="text" id="urlInput" class="url-input" placeholder="enter URL to block, eg:- google.com">
-        <button id="addButton" class="add-button">Add</button>
+        <button id="addButton" class="button">Add</button>
         <div id="blockedSitesList"></div>
+        <div id="active-hours" class="active-hours">
+            <div id="start-time" class="time-box">
+                <h3>Start Time</h3>
+                <input type="time" title="start-time" min="0" />
+            </div>
+            <div id="end-time" class="time-box">
+                <h3>End Time</h3>
+                <input type="time" title="end-time" />
+            </div>
+        </div>
+        <button class="button">save</button>
     </div>
     <script src="popup.js"></script>
 </body>

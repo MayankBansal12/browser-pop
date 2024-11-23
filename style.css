@@ -151,7 +151,7 @@ body {
     border-color: var(--main-text-color);
 }
 
-.add-button {
+.button {
     width: 100px;
     text-align: center;
     padding: 0.25rem 1rem;
@@ -163,8 +163,55 @@ body {
     transition: all 0.2s ease;
 }
 
-.add-button:hover {
+.button:hover {
     cursor: pointer;
     opacity: 0.9;
     transform: scale(0.975);
+}
+
+.active-hours {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.time-box {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+}
+
+.time-box input {
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 0.5rem;
+    border: none;
+    border-bottom: 1px solid var(--main-text-color);
+    outline: none;
+    text-align: center;
+    font-size: 1rem;
+    background: transparent;
+    color: var(--main-text-color);
+    transition: all 0.3s ease-in-out;
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
+    &::-webkit-inner-spin-button {
+        display: none;
+    }
+
+    &::-webkit-outer-spin-button {
+        display: none;
+    }
+
+    &:focus {
+        border: 1px solid var(--main-text-color);
+        outline: none;
+    }
 }
