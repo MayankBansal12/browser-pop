@@ -14,7 +14,8 @@
     --main-text-color: #EEEEEE;
     --secondary-color: #31363F;
     --texture-color: #76ABAE;
-    --active-color: #2f9e44;
+    --active-color: #00ff2f;
+    --inactive-color: darkgray;
 }
 
 ::-webkit-scrollbar {
@@ -34,6 +35,15 @@ body {
     background-color: var(--main-bg-color);
     color: var(--main-text-color);
     scroll-behavior: smooth;
+    cursor: default;
+}
+
+button {
+    cursor: pointer;
+}
+
+#message {
+    padding-block: 0.1rem;
 }
 
 .header {
@@ -45,6 +55,7 @@ body {
     padding-block: 15px;
     position: fixed;
     background: var(--main-bg-color);
+    z-index: 10;
 }
 
 .main-container {
@@ -65,6 +76,14 @@ body {
     text-align: center;
 }
 
+.overlay {
+    height: 100%;
+    width: 100%;
+    background-color: #00000080;
+    position: fixed;
+    z-index: 9;
+}
+
 .secondary-heading {
     font-size: 1rem;
     padding-block: 1rem;
@@ -82,38 +101,33 @@ body {
     gap: 3px;
     text-align: center;
     font-size: 0.8rem;
-}
-
-.outer-circle {
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    background-color: var(--main-text-color);
-}
-
-.inner-circle {
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    background-color: var(--main-text-color);
-    filter: blur(2px);
-}
-
-.active {
     color: var(--active-color);
-}
-
-.active .dot {
-    background-color: var(--active-color);
-}
-
-.not-active {
-    color: darkgray;
     opacity: 60%;
 }
 
+.outer-circle {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+}
+
+.dot {
+    background-color: var(--active-color);
+}
+
+.inner-circle {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    filter: blur(5px);
+}
+
+.not-active {
+    color: var(--inactive-color);
+}
+
 .not-active .dot {
-    background-color: darkgray;
+    background-color: var(--inactive-color);
     filter: blur(0px);
     opacity: 50%;
 }
@@ -134,7 +148,6 @@ body {
 }
 
 .list-buttons button:hover {
-    cursor: pointer;
     opacity: 0.9;
     transform: scale(0.975);
 }
@@ -189,7 +202,6 @@ body {
 }
 
 .button:hover {
-    cursor: pointer;
     opacity: 0.9;
     transform: scale(0.975);
 }

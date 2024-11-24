@@ -11,17 +11,18 @@
 </head>
 
 <body>
-    <div class="header">
+    <div id="header" class="header">
         <h2 class="main-heading">BrowserPop</h2>
-        <div class="current-status active">
-            <div class="outer-circle dot">
+        <div class="current-status" id="current-status">
+            <button class="outer-circle dot" title="status" id="current-status-btn">
                 <div class="inner-circle dot"></div>
-            </div>
-            <p id="current-status">currently active</p>
+            </button>
+            <div id="current-status-title">not active</div>
         </div>
+        <p id="header-message"></p>
     </div>
-
-    <div class="main-container">
+    <div id="overlay"></div>
+    <div id="container" class="main-container">
         <h2 class="secondary-heading">manage your browser activity with ease<br />start by adding a site to block list
         </h2>
         <div id="blocked-urls" class="blocked-urls-container"></div>
@@ -36,7 +37,7 @@
                 <div class="outer-circle dot">
                     <div class="inner-circle dot"></div>
                 </div>
-                <p id="current-status">not active</p>
+                <p id="active-hours-status">not active</p>
             </div>
         </div>
         <div id="active-hours" class="active-hours">
