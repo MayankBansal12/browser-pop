@@ -11,12 +11,14 @@
 </head>
 
 <body>
-    <h2 class="main-heading">BrowserPop</h2>
-    <div class="current-status active">
-        <div class="outer-circle dot">
-            <div class="inner-circle dot"></div>
+    <div class="header">
+        <h2 class="main-heading">BrowserPop</h2>
+        <div class="current-status active">
+            <div class="outer-circle dot">
+                <div class="inner-circle dot"></div>
+            </div>
+            <p id="current-status">currently active</p>
         </div>
-        <p id="current-status">currently active</p>
     </div>
 
     <div class="main-container">
@@ -25,19 +27,31 @@
         <div id="blocked-urls" class="blocked-urls-container"></div>
         <div id="message"></div>
         <input type="text" id="urlInput" class="url-input" placeholder="enter URL to block, eg:- google.com">
-        <button id="addButton" class="button">Add</button>
+        <button id="add-button" class="button">Add</button>
         <div id="blockedSitesList"></div>
-        <div id="active-hours" class="active-hours">
-            <div id="start-time" class="time-box">
-                <h3>Start Time</h3>
-                <input type="time" title="start-time" min="0" />
-            </div>
-            <div id="end-time" class="time-box">
-                <h3>End Time</h3>
-                <input type="time" title="end-time" />
+
+        <div class="active-hours-heading">
+            <h2 class="secondary-heading">set active hours and automate timing for browserpop</h2>
+            <div class="current-status not-active">
+                <div class="outer-circle dot">
+                    <div class="inner-circle dot"></div>
+                </div>
+                <p id="current-status">not active</p>
             </div>
         </div>
-        <button class="button">save</button>
+        <div id="active-hours" class="active-hours">
+            <div class="time-box">
+                <h3>Start Time</h3>
+                <input type="time" title="start-time" min="0" id="start-time" class="time-box-input hidden" />
+                <span class="display-time">08:00</span>
+            </div>
+            <div class="time-box">
+                <h3>End Time</h3>
+                <input type="time" title="end-time" id="end-time" class="time-box-input hidden" />
+                <span class="display-time">22:00</span>
+            </div>
+        </div>
+        <button id="active-hours-btn" class="button">edit hrs</button>
     </div>
     <script src="popup.js"></script>
 </body>
