@@ -1,13 +1,28 @@
-const currentDomain=window.location.hostname.replace("www.","")
+async function checkExtensionStatus() {
+    const data = await chrome.storage.sync.get({ isActive: true });
+    return data.isActive;
+}
 
-chrome.storage.sync.get({blockedUrls: []},(data)=>{
-    const blockedUrls=data.blockedUrls
-    if(!blockedUrls || blockedUrls.length<=0){
+async function handleBlockedUrls() {
+    const isActive = await checkExtensionStatus();
+    console.log("data . isactive: " + isActive)
+    if (!isActive) {
         return;
     }
-    blockedUrls.forEach(entry=>{
-        if(entry.url === currentDomain && entry.open === true){
-            window.location.href = chrome.runtime.getURL("blocked.html?url="+ currentDomain);        
+
+    const { blockedUrls } = await chrome.storage.sync.get({ blockedUrls: [] });
+    if (!blockedUrls.length) {
+        return;
+    }
+
+    const currentUrl = window.location.href;
+    const currentDomain = window.location.hostname;
+    blockedUrls.forEach(entry => {
+        if (entry.url === currentDomain && entry.open === true) {
+            const blockedUrl = chrome.runtime.getURL(`blocked.html?url=${decodeURIComponent(currentUrl)}`);
+            window.location.href = blockedUrl;
         }
-    })
-})
+    });
+}
+
+handleBlockedUrls();

@@ -30,6 +30,10 @@
     display: inline-flex;
 }
 
+.text-center {
+    text-align: center;
+}
+
 body {
     width: 350px;
     background-color: var(--main-bg-color);
@@ -48,9 +52,9 @@ button {
 
 .header {
     width: 100%;
-    text-align: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 5px;
     padding-block: 15px;
     position: fixed;
@@ -99,7 +103,6 @@ button {
     justify-content: center;
     align-items: center;
     gap: 3px;
-    text-align: center;
     font-size: 0.8rem;
     color: var(--active-color);
     opacity: 60%;

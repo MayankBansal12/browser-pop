@@ -5,13 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrowserPop - site is blocked!</title>
+    <link rel="stylesheet" href="blocked.css">
 </head>
 
 <body>
-    <h1>This site is blocked!</h1>
-    <p>You've blocked access to this website.</p>
+    <div class="blocked-container">
+        <h2 class="blocked-heading">This site is blocked!</h2>
+        <p class="blocked-para">You've blocked access to this website.</p>
 
-    <button id="access-site-btn">continue to the site!</button>
+        <div class="quote" id="quote"></div>
+    </div>
+    <p class="footer">powered by <span class="underline">browserpop</span></p>
+
     <script src="blocked.js"></script>
 </body>
 
