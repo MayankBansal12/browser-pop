@@ -1,10 +1,8 @@
+import { checkActiveRange } from "./content.js";
+
 let blockedUrlsDiv = document.getElementById("blocked-urls")
 let messageDiv = document.getElementById("message")
 let inputDiv = document.getElementById("urlInput")
-let activeHoursBtn = document.getElementById("active-hours-btn")
-let activeHoursDiv = document.getElementById("active-hours")
-let mainContainerDiv = document.getElementById("container")
-let headerDiv = document.getElementById("header")
 let overlayDiv = document.getElementById("overlay")
 let currentStatusDiv = document.getElementById("current-status")
 let currentStatusHeading = document.getElementById("current-status-title")
@@ -55,6 +53,7 @@ function updateUrlStatus(entry, blockedUrls, isActive) {
 
 async function displayContent() {
   refreshExtensionStatus();
+  showDisplayTime();
 
   chrome.storage.sync.get({ blockedUrls: [] }, (data) => {
     const blockedUrls = data.blockedUrls;
@@ -93,6 +92,47 @@ function refreshBlockedUrlsList(blockedUrls) {
   blockedUrls.forEach(entry => (createBlockUrlList(entry, blockedUrls)));
 }
 
+function showMessageNotification(message, timer = 3000) {
+  messageDiv.textContent = message
+  setTimeout(() => {
+    messageDiv.textContent = ""
+  }, timer)
+}
+
+async function showDisplayTime() {
+  let startTimeDisplay = document.getElementById("display-start-time")
+  let endTimeDisplay = document.getElementById("display-end-time")
+  let activeStatus = document.getElementById("active-hours-status")
+  let activeHoursDiv = document.getElementById("active-hours-current-status")
+  const isWithinRange = await checkActiveRange()
+
+  chrome.storage.sync.get({ startTime: "--:--", endTime: "--:--" }, (data) => {
+    startTimeDisplay.textContent = data.startTime
+    endTimeDisplay.textContent = data.endTime
+  })
+
+  if (!isWithinRange) {
+    activeStatus.textContent = "focus hrs off"
+    activeHoursDiv.classList.add("not-active")
+  } else {
+    activeStatus.textContent = "focus hrs on"
+    activeHoursDiv.classList.remove("not-active")
+  }
+
+  startTimeDisplay.classList.remove("hidden")
+  endTimeDisplay.classList.remove("hidden")
+}
+
+function hideDisplayTime() {
+  let timeBoxes = document.getElementsByClassName("display-time")
+  Array.from(timeBoxes).forEach(box => box.classList.add("hidden"))
+}
+
+async function saveTiming(startTime, endTime) {
+  await chrome.storage.sync.set({ startTime, endTime })
+  showMessageNotification("focus hours updated!", 2000)
+}
+
 function createBlockUrlList(entry, blockedUrls) {
   let newList = document.createElement("li");
   let url = document.createElement("p");
@@ -125,7 +165,7 @@ function createBlockUrlList(entry, blockedUrls) {
   blockedUrlsDiv.appendChild(newList);
 }
 
-document.getElementById("add-button").addEventListener("click", () => {
+function addUrlToBlockList() {
   const url = inputDiv.value.trim().replace(/^https?:\/\//, "").replace(/^www\./, "");
   if (url) {
     chrome.storage.sync.get({ blockedUrls: [] }, (data) => {
@@ -143,14 +183,23 @@ document.getElementById("add-button").addEventListener("click", () => {
       })
     });
   }
-});
+}
 
+document.getElementById("add-button").addEventListener("click", () => {
+  addUrlToBlockList()
+})
+
+document.getElementById("urlInput").addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    addUrlToBlockList()
+  }
+})
+
+const activeHoursBtn = document.getElementById("active-hours-btn")
 activeHoursBtn.addEventListener("click", () => {
   const textContent = activeHoursBtn.textContent
   const startBox = document.getElementById("start-time")
   const endBox = document.getElementById("end-time")
-
-  console.log(activeHoursBtn)
 
   if (textContent === "edit hrs") {
     startBox.classList.remove("hidden")
@@ -160,7 +209,7 @@ activeHoursBtn.addEventListener("click", () => {
   }
 
   if (textContent === "save hrs") {
-    console.log("values: ", startBox.value, endBox.value)
+    saveTiming(startBox.value, endBox.value)
     startBox.classList.add("hidden")
     endBox.classList.add("hidden")
     activeHoursBtn.textContent = "edit hrs"
@@ -168,21 +217,10 @@ activeHoursBtn.addEventListener("click", () => {
   }
 })
 
-function showMessageNotification(message, timer = 3000) {
-  messageDiv.textContent = message
-  setTimeout(() => {
-    messageDiv.textContent = ""
-  }, timer)
-}
-
-function showDisplayTime() {
-  let timeBoxes = document.getElementsByClassName("display-time")
-  Array.from(timeBoxes).forEach(box => box.classList.remove("hidden"))
-}
-
-function hideDisplayTime() {
-  let timeBoxes = document.getElementsByClassName("display-time")
-  Array.from(timeBoxes).forEach(box => box.classList.add("hidden"))
-}
+document.getElementById("reset-hours").addEventListener("click", () => {
+  chrome.storage.sync.set({ startTime: "--:--", endTime: "--:--" })
+  showDisplayTime()
+  showMessageNotification("focus hours reset!", 2000)
+})
 
 displayContent()

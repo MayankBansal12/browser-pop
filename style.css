@@ -50,6 +50,12 @@ button {
     padding-block: 0.1rem;
 }
 
+.secondary-text {
+    font-size: 0.7rem;
+    color: var(--inactive-color);
+    text-align: center;
+}
+
 .header {
     width: 100%;
     display: flex;
@@ -90,7 +96,6 @@ button {
 
 .secondary-heading {
     font-size: 1rem;
-    padding-block: 1rem;
     text-align: center;
 }
 
@@ -184,7 +189,7 @@ button {
     border: 1px solid rgba(255, 255, 255, 0.5);
     width: 220px;
     height: 2rem;
-    transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
 }
 
 .url-input:focus {
@@ -209,11 +214,30 @@ button {
     transform: scale(0.975);
 }
 
+.active-hours-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .active-hours {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+}
+
+.reset-hours {
+    text-align: center;
+    padding-top: 0.6rem;
+    text-decoration: underline;
+    color: var(--inactive-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.reset-hours:hover {
+    color: var(--main-text-color);
 }
 
 .time-box {
