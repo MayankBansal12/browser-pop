@@ -29,12 +29,12 @@ async function handleBlockedUrls() {
     });
 }
 
-export async function checkActiveRange() {
+async function checkActiveRange() {
     const data = await chrome.storage.sync.get({ startTime: null, endTime: null })
     const startTime = data.startTime
     const endTime = data.endTime
-    if (!startTime || !endTime) {
-        return false;
+    if (!startTime || !endTime || startTime === "--:--" || endTime === "--:--") {
+        return true;
     }
     const date = new Date()
     const currentTime = date.getHours() + ":" + date.getMinutes()

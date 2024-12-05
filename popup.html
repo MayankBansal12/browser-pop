@@ -26,8 +26,8 @@
         <h2 class="secondary-heading">manage your browser activity with ease<br />start by adding a site to block list
         </h2>
         <span class="secondary-text">*if focus hrs are set, then site block <br /> might gets affected in case focus hrs
-            are
-            off</span>
+            are off
+        </span>
         <div id="blocked-urls" class="blocked-urls-container"></div>
         <div id="message"></div>
         <input type="text" id="urlInput" class="url-input" placeholder="enter URL to block, eg:- google.com">
@@ -48,18 +48,31 @@
             <div class="time-box">
                 <h3>Start Time</h3>
                 <input type="time" title="start-time" min="0" id="start-time" class="time-box-input hidden" />
-                <span class="display-time" id="display-start-time">08:00</span>
+                <span class="display-time" id="display-start-time">--:--</span>
             </div>
             <div class="time-box">
                 <h3>End Time</h3>
                 <input type="time" title="end-time" id="end-time" class="time-box-input hidden" />
-                <span class="display-time" id="display-end-time">22:00</span>
+                <span class="display-time" id="display-end-time">--:--</span>
             </div>
         </div>
         <span class="secondary-text">*uses 24hr format</span>
         <button id="active-hours-btn" class="button">edit hrs</button>
     </div>
-    <script type="module" src="popup.js"></script>
+    <div class="footer">
+        <p>
+            made using plain html, css, js. code is open source on github.
+            user info is not stored anywhere but the user's browser.
+        </p>
+        <p>
+            in case of any issues, email on
+            <a href="mailto:mayankbansal125@gmail.com">mayankbansal125@gmail.com</a>
+            or open a <a href="https://github.com/MayankBansal12/browser-pop/issues">issue</a> on <a
+                href="https://github.com/MayankBansal12/browser-pop">github.</a>
+        </p>
+        <p>new features coming soon...</p>
+    </div>
+    <script src="popup.js"></script>
 </body>
 
 </html>

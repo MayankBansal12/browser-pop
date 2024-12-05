@@ -1,5 +1,3 @@
-import { checkActiveRange } from "./content.js";
-
 let blockedUrlsDiv = document.getElementById("blocked-urls")
 let messageDiv = document.getElementById("message")
 let inputDiv = document.getElementById("urlInput")
@@ -99,12 +97,39 @@ function showMessageNotification(message, timer = 3000) {
   }, timer)
 }
 
+async function checkFocusHours() {
+  const data = await chrome.storage.sync.get({ startTime: null, endTime: null })
+  const startTime = data.startTime
+  const endTime = data.endTime
+  if (!startTime || !endTime || startTime === "--:--" || endTime === "--:--") {
+    return false;
+  }
+  const date = new Date()
+  const currentTime = date.getHours() + ":" + date.getMinutes()
+
+  const now = parseTime(currentTime);
+  let start = parseTime(startTime);
+  let end = parseTime(endTime);
+  if (end < start) {
+    start.setDate(start.getDate() - 1);
+  }
+  const isWithinRange = now >= start && now <= end;
+  return isWithinRange;
+}
+
+function parseTime(time, baseDate = new Date()) {
+  const [hours, minutes] = time.split(":").map(Number);
+  const parsed = new Date(baseDate);
+  parsed.setHours(hours, minutes, 0, 0);
+  return parsed;
+}
+
 async function showDisplayTime() {
   let startTimeDisplay = document.getElementById("display-start-time")
   let endTimeDisplay = document.getElementById("display-end-time")
   let activeStatus = document.getElementById("active-hours-status")
   let activeHoursDiv = document.getElementById("active-hours-current-status")
-  const isWithinRange = await checkActiveRange()
+  const isWithinRange = await checkFocusHours()
 
   chrome.storage.sync.get({ startTime: "--:--", endTime: "--:--" }, (data) => {
     startTimeDisplay.textContent = data.startTime
