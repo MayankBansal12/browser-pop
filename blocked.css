@@ -4,10 +4,19 @@
     text-transform: lowercase;
     font-family: "Ubuntu", sans-serif;
     background-color: #EEEEEE;
+    transform: all 0.3s ease;
 }
 
 body {
     padding: 0.5rem 2rem;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    opacity: 0.8;
 }
 
 .underline {
@@ -23,7 +32,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 
 .blocked-heading {
     font-size: 2rem;
