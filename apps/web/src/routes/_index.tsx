@@ -1,6 +1,5 @@
-import type { Route } from "./+types/_index";
-import { useQuery } from "convex/react";
 import { api } from "@browser-pop/backend/convex/_generated/api";
+import { useQuery } from "convex/react";
 
 const TITLE_TEXT = `
  ██████╗ ███████╗████████╗████████╗███████╗██████╗
@@ -18,7 +17,7 @@ const TITLE_TEXT = `
     ╚═╝       ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
  `;
 
-export function meta({}: Route.MetaArgs) {
+export function meta() {
 	return [
 		{ title: "browser-pop" },
 		{ name: "description", content: "browser-pop is a web application" },
@@ -38,7 +37,7 @@ export default function Home() {
 						<div
 							className={`h-2 w-2 rounded-full ${healthCheck === "OK" ? "bg-green-500" : healthCheck === undefined ? "bg-orange-400" : "bg-red-500"}`}
 						/>
-						<span className="text-sm text-muted-foreground">
+						<span className="text-muted-foreground text-sm">
 							{healthCheck === undefined
 								? "Checking..."
 								: healthCheck === "OK"

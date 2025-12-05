@@ -10,7 +10,10 @@
 		"includes": [
 			"**",
 			"!**/.next",
+			"!**/.react-router",
 			"!**/dist",
+			"!**/build",
+			"!**/_generated",
 			"!**/.turbo",
 			"!**/dev-dist",
 			"!**/.zed",
