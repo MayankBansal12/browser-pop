@@ -1,19 +1,19 @@
-import { Button } from "@/components/ui/button";
+import { api } from "@browser-pop/backend/convex/_generated/api";
+import type { Id } from "@browser-pop/backend/convex/_generated/dataModel";
 import {
+	Button,
 	Card,
 	CardContent,
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Loader2, Trash2 } from "lucide-react";
-import { useState } from "react";
+	Checkbox,
+	Input,
+} from "@browser-pop/components";
 
 import { useMutation, useQuery } from "convex/react";
-import { api } from "@browser-pop/backend/convex/_generated/api";
-import type { Id } from "@browser-pop/backend/convex/_generated/dataModel";
+import { Loader2, Trash2 } from "lucide-react";
+import { useState } from "react";
 
 export default function Todos() {
 	const [newTodoText, setNewTodoText] = useState("");
@@ -40,7 +40,7 @@ export default function Todos() {
 	};
 
 	return (
-		<div className="w-full mx-auto max-w-md py-10">
+		<div className="mx-auto w-full max-w-md py-10">
 			<Card>
 				<CardHeader>
 					<CardTitle>Todo List</CardTitle>
@@ -84,7 +84,7 @@ export default function Todos() {
 										/>
 										<label
 											htmlFor={`todo-${todo._id}`}
-											className={`${todo.completed ? "line-through text-muted-foreground" : ""}`}
+											className={`${todo.completed ? "text-muted-foreground line-through" : ""}`}
 										>
 											{todo.text}
 										</label>
