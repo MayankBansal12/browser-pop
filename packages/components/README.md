@@ -1,96 +1,75 @@
-# @browser-pop/components
+# React + TypeScript + Vite
 
-Shared UI component library for browser-pop applications built with shadcn/ui and Tailwind CSS.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Overview
+Currently, two official plugins are available:
 
-This package contains reusable UI components that can be used across different applications in the browser-pop monorepo. The components are built on top of Radix UI primitives and styled with Tailwind CSS.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Features
+## React Compiler
 
-- 🎨 Built with shadcn/ui design system
-- 🔧 TypeScript support
-- 🎯 Radix UI primitives for accessibility
-- 🌙 Dark mode support
-- 📦 Tree-shakable exports
-- 🎨 Customizable with CSS variables
+The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
 
-## Components
+Note: This will impact Vite dev & build performances.
 
-### UI Components
+## Expanding the ESLint configuration
 
-- **Button** - Interactive button component with multiple variants
-- **Card** - Container component for content organization
-- **Checkbox** - Form checkbox input with custom styling
-- **DropdownMenu** - Accessible dropdown menu component
-- **Input** - Form input component
-- **Label** - Form label component
-- **Skeleton** - Loading placeholder component
-- **Toaster** - Toast notification component
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-### Utilities
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-- **cn** - Class name utility function (combines clsx and tailwind-merge)
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-## Usage
-
-Import components from the package:
-
-```tsx
-import { Button, Card, Checkbox } from '@browser-pop/components';
-
-function MyComponent() {
-  return (
-    <Card>
-      <Button variant="primary">Click me</Button>
-      <Checkbox>Accept terms</Checkbox>
-    </Card>
-  );
-}
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-## Styling
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-Components use CSS variables for theming that should be defined in your application's global CSS. The components are designed to work with Tailwind CSS and expect the following CSS variables to be defined:
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-- `--background`
-- `--foreground`
-- `--primary`
-- `--primary-foreground`
-- `--secondary`
-- `--secondary-foreground`
-- `--accent`
-- `--accent-foreground`
-- `--destructive`
-- `--border`
-- `--input`
-- `--ring`
-- And more...
-
-## Development
-
-This package is part of the browser-pop monorepo and should be developed alongside the applications that use it.
-
-### Adding New Components
-
-1. Create the component in `src/ui/`
-2. Export it from `index.ts`
-3. Add any required dependencies to `package.json`
-4. Update this README with the new component
-
-## Dependencies
-
-- React 19+
-- Radix UI primitives
-- Lucide React (icons)
-- class-variance-authority
-- clsx
-- tailwind-merge
-- next-themes (for theme support)
-- sonner (for toasts)
-
-## Notes
-
-- Components use relative imports internally to avoid TypeScript path resolution issues
-- All components are client-side compatible
-- The package exports both individual components and utility functions
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
